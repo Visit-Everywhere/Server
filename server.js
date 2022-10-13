@@ -1,34 +1,17 @@
-/* 
-* CODED BY CISAMU (2022)
-* FOR VE CORP
-* Web Server
-*/
+import express from 'express';
+import Router from './routes/index.js' // all routes
+import DB from './db/connect.mongoose.js' // DB connecting
+process.env.PORT = process.env.PORT || 5000 // configuring port
 
-// Импортируем модуль require
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
-try {
-    // Модуль http для роботы с веб-сервером
+const app = express();
+const { models } = DB // extracting al models
 
-    const http = require('http');
-    
-    // Метод create server в модуле http
-    
-    const server = http.createServer();
-    
-    // Событие request (запрос - ответ)
-    
-    server.on('request', (req, res) => {
-        console.log(req.url);
-        console.log(req.method);
-        console.log(req.headers);
-        res.writeHead(200, { 'Content-Type': 'text/plain' });
-        res.end('Test Msg');
-    });
-    
-    server.listen(8080, () => console.log('Cервер работает'));
-} catch (web_server_error) {
-    console.error("Web Server error: " + web_server_error)
-}
+// middlewares
+app.use((req, res, next) => { // now in every request would be our models, we don't need to import everywhere
+    req.models = models
+    next()
+})
+// app.use(express.static('public')) // if project is 1 tier
+app.use(Router)
 
-// Базовый код. Создан 10.10.2022
+app.listen(process.env.PORT, console.log("I'm ready on http://localhost:" + (process.env.PORT)))
