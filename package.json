@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "npm run server.js",
-    "start:dev": "nodemon server.js"
+    "dev": "nodemon server.js"
   },
   "author": "Mykyta",
   "license": "ISC",
