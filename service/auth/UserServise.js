@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt'
 
-import MailService from './MailService.js'
 
 class UserService{
     async registration(email, password, gender, username, User){

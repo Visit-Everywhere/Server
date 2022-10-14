@@ -6,7 +6,7 @@ class UserContoller {
         const { email, password, gender, username } = req.body
         const { UserModel } = req.models
         const userInfo = await UserServise.registration(email, password, gender, username, UserModel)
-        res.status(202).json(userInfo)
+        res.status(200).json(userInfo)
     } catch (err) {
       console.log(`This is error:${err}`);
     }
