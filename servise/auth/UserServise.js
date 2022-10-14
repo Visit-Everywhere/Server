@@ -3,14 +3,15 @@ import bcrypt from 'bcrypt'
 import MailService from './MailService.js'
 
 class UserService{
-    async registration(email, password, gender, User){
+    async registration(email, password, gender, username, User){
         const person = await User.findOne({email})
         if(person){
             console.error(`Пользователь с почтой ${email} уже зарегестрирован`)
         }
         const hashedPassword = await bcrypt.hash(password, 3)
-        const activationLink = hashedPassword
-        const user = await User.create({email, password: hashedPassword, gender})
+        await User.create({email, password: hashedPassword, gender, username})
+
+        return { email, username, gender }
     }
 }
 
