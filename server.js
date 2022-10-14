@@ -3,6 +3,7 @@ import Router from './routes/index.js' // all routes
 import DB from '#utils/connectMongoose' // DB connecting
 import fs from 'fs'
 import path from 'path'
+import authRouter from './routes/auth/authRoutes.js';
 
 const app = express();
 const { models } = DB // extracting al models
@@ -17,7 +18,8 @@ app.use((req, res, next) => { // now in every request would be our models, we do
 // app.use(express.static('public')) // if project is 1 tier
 app.use(express.json()) // I think u know why we use this
 app.use(Router) // gave all routes
-
+app.use(authRouter)
+console.log(authRouter)
 app.use((error, req, res, next) => { // its our error handler middleware
     if (error.status !== 500) { // if error is not internal server error its response, we also write it in our logger
         return res.status(error.status).json({
