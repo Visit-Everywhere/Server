@@ -1,5 +1,9 @@
-import User from './user.model.js'
+import UserModel from "./auth/UserModel.js";
+import TokenModel from "./auth/TokenModel.js";
+import RoleModel from "./auth/RoleModel.js";
 
 export default {
-    User,
+    UserModel,
+    TokenModel,
+    RoleModel,
 }
