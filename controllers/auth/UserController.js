@@ -1,4 +1,4 @@
-import UserServise from "../../servise/auth/UserServise.js";
+import UserServise from "../../service/auth/UserServise.js";
 
 class UserContoller {
   async registration(req, res, next) {

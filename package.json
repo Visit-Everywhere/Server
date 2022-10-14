@@ -23,6 +23,7 @@
   "imports": {
     "#utils/*": "./utils/*.js",
     "#controller/*": "./controllers/*.js",
+    "#config/*": "./config/*.js",
     "#validation/*": "./validation/*.js"
   }
 }
