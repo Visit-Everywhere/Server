@@ -8,4 +8,4 @@ let transporter = nodemailer.createTransport({
   }
 })
 
-export default ''
+export default transporter

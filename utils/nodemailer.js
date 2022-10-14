@@ -1,4 +1,5 @@
-import { transporter } from '#config/idex.js'
+import transporter from '#config/nodemailerTransporter.js'
+
 let mailer = message => {
   transporter.sendMail(message, (err, info) => {
       if (err) return console.log(err.message);
