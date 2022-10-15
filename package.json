@@ -23,6 +23,8 @@
   "imports": {
     "#utils/*": "./utils/*.js",
     "#authController/*": "./controllers/auth/*.js",
+    "#authRoute/*": "./routes/auth/*.js",
+    "#authService/*": "./service/auth/*.js",
     "#config/*": "./config/*.js",
     "#middlewares/*": "./middlewares/*.js",
     "#validation/*": "./validation/*.js"

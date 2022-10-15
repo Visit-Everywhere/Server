@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import tokenService from "./TokenService.js";
 import UserDto from "../../dtos/UserDto.js";
-
+import JWT from "#utils/jwt";
 
 class UserService {
   async registration(email, password, gender, username, User, tockenModel) {
@@ -17,9 +17,10 @@ class UserService {
       username,
     });
     const userDto = new UserDto(user);
-    const tokens = tokenService.generateToken({...userDto})
-    await tokenService.saveTocken(userDto.id, tokens.refreshToken, tockenModel)
-    return { ...tokens, userDto }
+    const tokens = { accesToken: JWT.sign({ ...userDto }), refreshToken: JWT.sign({ ...userDto }) };
+
+    await tokenService.saveTocken(userDto.id, tokens.refreshToken, tockenModel);
+    return { ...tokens, userDto };
   }
 }
 

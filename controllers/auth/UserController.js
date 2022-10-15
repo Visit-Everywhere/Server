@@ -1,4 +1,4 @@
-import UserService from "../../service/auth/UserService.js"
+import UserService from "#authService/UserService"
 
 class UserContoller {
   async registration(req, res, next) {
@@ -33,6 +33,15 @@ class UserContoller {
     try {
     } catch (err) {
       console.log(`This is error:${err}`);
+    }
+  }
+  async checkCode(req, res, next) {
+    try {
+      let clientCode = req.body // need to know exactly what comes from body
+      
+
+    } catch (err) {
+
     }
   }
 }
