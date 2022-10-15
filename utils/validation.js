@@ -4,6 +4,8 @@ export const userValidationRegister = Joi.object({
     body: Joi.object({
         username: Joi.string().required().max(15).alphanum(),
         password: Joi.string().required().min(4),
+        email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } }).required(),
+        gender: Joi.string().valid('male', 'female').required()
     }),
 })
 

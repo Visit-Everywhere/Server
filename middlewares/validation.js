@@ -2,8 +2,8 @@ import {
   userValidationRegister, 
   userValidationLogin, 
   userValidationToken, 
-} from "../validation/validations.js"
-import { ValidationError } from "../utils/errors.js"
+} from "#utils/validation"
+import { ValidationError } from "#utils/errors"
 
 export default (req, res, next) => {
   try {

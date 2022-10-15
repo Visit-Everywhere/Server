@@ -22,8 +22,9 @@
   },
   "imports": {
     "#utils/*": "./utils/*.js",
-    "#controller/*": "./controllers/*.js",
+    "#authController/*": "./controllers/auth/*.js",
     "#config/*": "./config/*.js",
+    "#middlewares/*": "./middlewares/*.js",
     "#validation/*": "./validation/*.js"
   }
 }
