@@ -13,10 +13,10 @@ async function connect() {
       useUnifiedTopology: true,
     });
     console.log("DB connected");
-    return true
+    return true;
   } catch (err) {
     console.log(`DB don't connected ${err}`);
-    return false
+    return false;
   }
 }
 export default {
