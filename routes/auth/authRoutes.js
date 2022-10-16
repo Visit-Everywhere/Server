@@ -4,7 +4,7 @@ import UserController from "#authController/UserController";
 
 const authRouter = Router();
 
-authRouter.post("/register", validations, UserController.registration);
+authRouter.post("/register", validations, UserController.register);
 
 authRouter.post("/checkCode", UserController.checkCode);
 

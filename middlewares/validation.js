@@ -1,10 +1,14 @@
-import { userValidationRegister, userValidationLogin, userValidationToken } from "#utils/validation";
+import { userValidationRegister, userValidationLogin, userValidationToken, userValidationCode } from "#utils/validation";
 import { ValidationError } from "#utils/errors";
 
 export default (req, res, next) => {
   try {
     if (req.method === "POST" && req.url == "/register") {
       const { error } = userValidationRegister.validate({ body: req.body });
+      if (error) throw error;
+    }
+    if (req.method === "POST" && req.url == "/checkCode") {
+      const { error } = userValidationCode.validate({ body: req.body });
       if (error) throw error;
     }
 
