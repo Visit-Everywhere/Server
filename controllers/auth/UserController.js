@@ -1,4 +1,5 @@
 import UserService from "#authService/UserService";
+import { ValidationError } from "#utils/errors";
 
 class UserContoller {
   async registration(req, res, next) {
@@ -6,7 +7,7 @@ class UserContoller {
       await UserService.registration(req, res, next);
       res.status(200).json({ status: 200 });
     } catch (err) {
-      console.log(`This is error:${err}`);
+      next()
     }
   }
   async checkCode(req, res, next) {

@@ -36,7 +36,6 @@ class UserService {
     delete users[email];
     fs.writeFileSync(path.join(process.cwd(), "json", "users.json"), JSON.stringify(users, null, 4)); // writing to json file
 
-    // ertaga eslatiwim kere code tekwiradigan page user ozidan ozi otolamasligi kere, agar localstorageda email dgan key bosagina kiriwi mumkn va bu pagedan cqb ketiwi bilan localstorage yana tozalavoriwi kere
     if (currentUser && currentUser.code == code) {
       const user = await req.models.UserModel.create({
         email: currentUser.email,
@@ -47,7 +46,7 @@ class UserService {
 
       const userDto = new UserDto(user);
       const tokens = { accesToken: JWT.sign({ ...userDto }), refreshToken: JWT.sign({ ...userDto }) };
-      await tokenService.saveTocken(userDto.id, tokens.refreshToken, req.models.TokenModel);
+      await tokenService.saveToken(userDto.id, tokens.refreshToken, req.models.TokenModel);
       return { ...tokens, userDto };
     } else {
       // error

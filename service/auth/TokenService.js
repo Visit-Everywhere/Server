@@ -1,5 +1,5 @@
 class TokenService {
-  async saveTocken(userID, refreshToken, tokenModel) {
+  async saveToken(userID, refreshToken, tokenModel) {
     const checkToken = await tokenModel.findOne({ user: userID });
     if (checkToken) {
       checkToken.refreshToken = refreshToken;
