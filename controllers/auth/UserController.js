@@ -1,14 +1,21 @@
-import UserService from "../../service/auth/UserService.js"
+import UserService from "#authService/UserService";
+import { ValidationError } from "#utils/errors";
 
 class UserContoller {
   async registration(req, res, next) {
     try {
-        const { email, password, gender, username } = req.body
-        const { UserModel, TokenModel } = req.models
-        const userInfo = await UserService.registration(email, password, gender, username, UserModel, TokenModel)
-        res.status(200).json(userInfo)
+      await UserService.registration(req, res, next);
+      res.status(200).json({ status: 200 });
     } catch (err) {
-      console.log(`This is error:${err}`);
+      next()
+    }
+  }
+  async checkCode(req, res, next) {
+    try {
+      let userInfo = await UserService.checkCode(req, res, next);
+      res.status(200).json(userInfo);
+    } catch (err) {
+      // errory
     }
   }
   async login(req, res, next) {

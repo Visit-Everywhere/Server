@@ -1,9 +1,12 @@
 import { Router } from "express";
-import UserController from "../../controllers/auth/UserController.js"
+import validations from "#middlewares/validation";
+import UserController from "#authController/UserController";
 
 const authRouter = Router();
 
-authRouter.post("/registration", UserController.registration);
+authRouter.post("/register", validations, UserController.registration);
+
+authRouter.post("/checkCode", UserController.checkCode);
 
 authRouter.post("/login", UserController.login);
 
