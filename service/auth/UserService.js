@@ -47,7 +47,6 @@ class UserService {
         const tokens = { accesToken: JWT.sign({ ...userDto }), refreshToken: JWT.refresh({ ...userDto }) };
         await tokenService.saveToken(userDto.id, tokens.refreshToken, tokenModel);
         return { ...tokens, userDto };
-        return {status: 'ok'}
       
     } else {
       throw new ValidationError(400, 'Code does not match')

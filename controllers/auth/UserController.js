@@ -5,8 +5,8 @@ class UserContoller {
     try {
       const { email, password, gender, username } = req.body;
       const { UserModel } = req.models;
-      const userInfo = await UserService.register(email, password, gender, username, UserModel);
-      res.status(200).json(userInfo);
+      await UserService.register(email, password, gender, username, UserModel);
+      res.status(200).json({status: 200, message: 'Code sended to user email'});
     } catch (err) {
       next(err)
     }
