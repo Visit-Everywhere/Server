@@ -5,7 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "npm run server.js",
+    "start": "node server.js",
     "dev": "nodemon server.js"
   },
   "author": "Mykyta",
