@@ -7,6 +7,7 @@ import JWT from "#utils/jwt";
 import { ValidationError, NotFoundError } from "#utils/errors";
 
 class UserService {
+  // register
   async register(email, password, gender, username, userModel, writeData) {
     try {
       const person = await userModel.findOne({ email });
@@ -31,7 +32,7 @@ class UserService {
   async checkCode(email, code, userModel, tokenModel, readData, deleteData) {
     try {
       let currentUser = await readData(email);
-      console.log(email);
+
       if (currentUser && currentUser.code == code) {
         deleteData(email);
 
@@ -55,6 +56,7 @@ class UserService {
       throw error;
     }
   }
+  // login
   async login(email, password, userModel, tokenModel) {
     try {
       const user = await userModel.findOne({ email });
@@ -69,12 +71,16 @@ class UserService {
       const userDto = new UserDto(user);
       const tokens = { accesToken: JWT.sign({ ...userDto }), refreshToken: JWT.refresh({ ...userDto }) };
       await tokenService.saveToken(userDto.id, tokens.refreshToken, tokenModel);
-      console.log('here');
       return { ...tokens, userDto };
     } catch (error) {
       throw error;
     }
   }
+  // restore password
+
+  // restoreEmail
+  // restoreCode
+  // restorePassword
 }
 
 export default new UserService();
