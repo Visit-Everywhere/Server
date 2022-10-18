@@ -3,6 +3,7 @@ import DB from "#utils/connectMongoose"; // DB connecting
 import fs from "fs";
 import path from "path";
 import authRouter from "#authRoute/authRoutes";
+import rwHelper from '#middlewares/rwHelper'
 
 const app = express();
 const { models } = DB; // extracting al models
@@ -14,21 +15,17 @@ app.use((req, res, next) => {
   req.models = models;
   next();
 });
-
+app.use(rwHelper())
 // app.use(express.static('public')) // if project is 1 tier
 app.use(express.json()); // I think u know why we use this
-
 app.use(authRouter);
-
 app.use((error, req, res, next) => {
   // its our error handler middleware
   if (error.status !== 500) {
     // if error is not internal server error its response, we also write it in our logger
-    return res.status(error.status).json({
+    return res.json({
       status: error.status,
       message: error.message,
-      data: null,
-      token: null,
     });
   }
 

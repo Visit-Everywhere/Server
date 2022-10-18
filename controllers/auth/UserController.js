@@ -5,7 +5,8 @@ class UserContoller {
     try {
       const { email, password, gender, username } = req.body;
       const { UserModel } = req.models;
-      await UserService.register(email, password, gender, username, UserModel);
+      const { readFile, writeFile } = req
+      await UserService.register(email, password, gender, username, UserModel, readFile, writeFile);
       res.status(200).json({status: 200, message: 'Code sended to user email'});
     } catch (err) {
       next(err)
@@ -15,10 +16,10 @@ class UserContoller {
     try {
       const { UserModel, TokenModel } = req.models
       const { email, code } = req.body
-      let userInfo = await UserService.checkCode(email, code, UserModel, TokenModel);
+      const { readFile, writeFile } = req
+      let userInfo = await UserService.checkCode(email, code, UserModel, TokenModel, readFile, writeFile);
       res.status(200).json(userInfo);
     } catch (err) {
-      console.log(err);
       next(err)
     }
   }
