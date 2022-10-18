@@ -3,7 +3,7 @@ import DB from "#utils/connectMongoose"; // DB connecting
 import fs from "fs";
 import path from "path";
 import authRouter from "#authRoute/authRoutes";
-import rwHelper from '#middlewares/rwHelper'
+import redis from '#middlewares/redis'
 import cookieParser from "cookie-parser";
 
 const app = express();
@@ -16,11 +16,10 @@ app.use((req, res, next) => {
   req.models = models;
   next();
 });
-
-app.use(cookieParser())
-app.use(rwHelper())
+app.use(redis())
 // app.use(express.static('public')) // if project is 1 tier
-app.use(express.json()); // I think u know why we use this
+app.use(express.json());
+app.use(cookieParser())
 app.use(authRouter);
 app.use((error, req, res, next) => {
   // its our error handler middleware
@@ -34,7 +33,7 @@ app.use((error, req, res, next) => {
 
   fs.appendFileSync(
     // writing error in our logger file
-    path.join(process.cwd(), "src", "log.txt"),
+    path.join(process.cwd(), "log.txt"),
     `${req.method}___${req.url}___${Date.now()}___${error.name}___${error.message}\n`
   );
 
