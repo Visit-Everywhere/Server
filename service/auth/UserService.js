@@ -16,7 +16,13 @@ class UserService {
       const hashedPassword = await bcrypt.hash(password, 3);
       let code = codeGenerator();
 
-      writeData(email, { email, password: hashedPassword, gender, username, code: code });
+      writeData(email, {
+        email,
+        password: hashedPassword,
+        gender,
+        username,
+        code: code,
+      });
 
       mailer({
         from: "xayrullohabduvohidov713@gmail.com",
@@ -34,7 +40,7 @@ class UserService {
 
       if (currentUser && currentUser.code == code) {
         deleteData(email);
-        
+
         const user = await userModel.create({
           email: currentUser.email,
           password: currentUser.password,
@@ -42,8 +48,15 @@ class UserService {
           username: currentUser.username,
         });
         const userDto = new UserDto(user);
-        const tokens = { accesToken: JWT.sign({ ...userDto }), refreshToken: JWT.refresh({ ...userDto }) };
-        await tokenService.saveToken(userDto.id, tokens.refreshToken, tokenModel);
+        const tokens = {
+          accesToken: JWT.sign({ ...userDto }),
+          refreshToken: JWT.refresh({ ...userDto }),
+        };
+        await tokenService.saveToken(
+          userDto.id,
+          tokens.refreshToken,
+          tokenModel
+        );
         return { ...tokens, userDto };
       } else {
         throw new ValidationError(400, "Code does not match");
@@ -51,6 +64,26 @@ class UserService {
     } catch (error) {
       throw error;
     }
+  }
+  async login(email, password, userModel, tokenModel) {
+    const user = userModel.findOne({ email });
+    if (!user) {
+      throw new ValidationError(400, "user with this email not found");
+    }
+    const checkPassword = await bcrypt.compare(password, user.password);
+    if (!checkPassword) {
+      throw new ValidationError(400, "password not valid");
+    }
+    const userDto = new UserDto(user);
+    const tokens = {
+      accesToken: JWT.sign({ ...userDto }),
+      refreshToken: JWT.refresh({ ...userDto }),
+    };
+    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokenModel);
+    return {
+      ...tokens,
+      userDto,
+    };
   }
 }
 
