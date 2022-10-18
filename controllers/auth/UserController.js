@@ -18,7 +18,6 @@ class UserContoller {
       const { email, code } = req.body
       const { readData, deleteData } = req
       let userInfo = await UserService.checkCode(email, code, UserModel, TokenModel, readData, deleteData);
-      res.cookie('refreshToken', userInfo.refreshToken, {maxAge: process.env.JWT_EXP_REFRESH * 24 * 60 * 60 * 1000, httpOnly: true})
       res.status(200).json(userInfo);
     } catch (err) {
       next(err)
@@ -29,7 +28,7 @@ class UserContoller {
       const { UserModel, TokenModel } = req.models
       const { email, password } = req.body
       let userInfo = await UserService.login(email, password, UserModel, TokenModel);
-      res.cookie('refreshToken', userInfo.refreshToken, {maxAge: process.env.JWT_EXP_REFRESH * 24 * 60 * 60 * 1000, httpOnly: true})
+      res.cookie('refreshToken', userInfo.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
       res.status(200).json(userInfo);
     } catch (err) {
       next(err)
