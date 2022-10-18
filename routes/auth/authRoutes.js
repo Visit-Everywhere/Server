@@ -6,9 +6,9 @@ const authRouter = Router();
 
 authRouter.post("/register", validations, UserController.register);
 
-authRouter.post("/checkCode", UserController.checkCode);
+authRouter.post("/checkCode", validations, UserController.checkCode);
 
-authRouter.post("/login", UserController.login);
+authRouter.post("/login", validations, UserController.login);
 
 authRouter.post("/logout", UserController.logout);
 

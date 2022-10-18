@@ -15,13 +15,14 @@ export const userValidationCode = Joi.object({
     code: Joi.string().required().length(6),
     email: Joi.string()
       .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
-      .required(),
+      .required()
   }),
 });
-
 export const userValidationLogin = Joi.object({
   body: Joi.object({
-    username: Joi.string().required(),
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+      .required(),
     password: Joi.string().required(),
   }),
 });

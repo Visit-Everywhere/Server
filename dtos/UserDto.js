@@ -7,6 +7,6 @@ export default class UserDto {
     this.email = model.email;
     this.gender = model.gender;
     this.id = model._id;
-    this.isActivated = model.isActivated;
+    this.isActivated = true;
   }
 }

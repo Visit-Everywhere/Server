@@ -24,9 +24,9 @@ app.use(authRouter);
 app.use((error, req, res, next) => {
   // its our error handler middleware
   if (error.status !== 500) {
+    console.log(error);
     // if error is not internal server error its response, we also write it in our logger
-    return res.json({
-      status: error.status,
+    return res.status(400).json({
       message: error.message,
     });
   }

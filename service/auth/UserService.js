@@ -4,7 +4,7 @@ import UserDto from "../../dtos/UserDto.js";
 import mailer from "#utils/nodemailer";
 import codeGenerator from "#utils/codeGenerator";
 import JWT from "#utils/jwt";
-import { ValidationError } from "#utils/errors";
+import { ValidationError, NotFoundError } from "#utils/errors";
 
 class UserService {
   async register(email, password, gender, username, userModel, writeData) {
@@ -16,13 +16,7 @@ class UserService {
       const hashedPassword = await bcrypt.hash(password, 3);
       let code = codeGenerator();
 
-      writeData(email, {
-        email,
-        password: hashedPassword,
-        gender,
-        username,
-        code: code,
-      });
+      writeData(email, { email, password: hashedPassword, gender, username, code: code });
 
       mailer({
         from: "xayrullohabduvohidov713@gmail.com",
@@ -37,7 +31,7 @@ class UserService {
   async checkCode(email, code, userModel, tokenModel, readData, deleteData) {
     try {
       let currentUser = await readData(email);
-
+      console.log(email);
       if (currentUser && currentUser.code == code) {
         deleteData(email);
 
@@ -52,11 +46,7 @@ class UserService {
           accesToken: JWT.sign({ ...userDto }),
           refreshToken: JWT.refresh({ ...userDto }),
         };
-        await tokenService.saveToken(
-          userDto.id,
-          tokens.refreshToken,
-          tokenModel
-        );
+        await tokenService.saveToken(userDto.id, tokens.refreshToken, tokenModel);
         return { ...tokens, userDto };
       } else {
         throw new ValidationError(400, "Code does not match");
@@ -66,24 +56,24 @@ class UserService {
     }
   }
   async login(email, password, userModel, tokenModel) {
-    const user = userModel.findOne({ email });
-    if (!user) {
-      throw new ValidationError(400, "user with this email not found");
+    try {
+      const user = await userModel.findOne({ email });
+      if (!user) {
+        throw new NotFoundError(400, "The user is not found");
+      }
+
+      const checkPassword = await bcrypt.compare(password, user.password);
+      if (!checkPassword) {
+        throw new ValidationError(400, "Code does not match");
+      }
+      const userDto = new UserDto(user);
+      const tokens = { accesToken: JWT.sign({ ...userDto }), refreshToken: JWT.refresh({ ...userDto }) };
+      await tokenService.saveToken(userDto.id, tokens.refreshToken, tokenModel);
+      console.log('here');
+      return { ...tokens, userDto };
+    } catch (error) {
+      throw error;
     }
-    const checkPassword = await bcrypt.compare(password, user.password);
-    if (!checkPassword) {
-      throw new ValidationError(400, "password not valid");
-    }
-    const userDto = new UserDto(user);
-    const tokens = {
-      accesToken: JWT.sign({ ...userDto }),
-      refreshToken: JWT.refresh({ ...userDto }),
-    };
-    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokenModel);
-    return {
-      ...tokens,
-      userDto,
-    };
   }
 }
 
