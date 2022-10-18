@@ -4,6 +4,7 @@ import fs from "fs";
 import path from "path";
 import authRouter from "#authRoute/authRoutes";
 import rwHelper from '#middlewares/rwHelper'
+import cookieParser from "cookie-parser";
 
 const app = express();
 const { models } = DB; // extracting al models
@@ -15,6 +16,8 @@ app.use((req, res, next) => {
   req.models = models;
   next();
 });
+
+app.use(cookieParser())
 app.use(rwHelper())
 // app.use(express.static('public')) // if project is 1 tier
 app.use(express.json()); // I think u know why we use this

@@ -18,6 +18,7 @@ class UserContoller {
       const { email, code } = req.body
       const { readFile, writeFile } = req
       let userInfo = await UserService.checkCode(email, code, UserModel, TokenModel, readFile, writeFile);
+      res.cookie('refreshToken', userInfo.refreshToken, {maxAge: process.env.JWT_EXP_REFRESH * 24 * 60 * 60 * 1000, httpOnly: true})
       res.status(200).json(userInfo);
     } catch (err) {
       next(err)
