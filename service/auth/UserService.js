@@ -76,6 +76,7 @@ class UserService {
       throw error;
     }
   }
+  // logout
   async logout(refreshToken, tokenModel){
     const token = await tokenService.removeToken(refreshToken, tokenModel)
     return token 

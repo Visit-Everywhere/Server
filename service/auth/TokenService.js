@@ -8,7 +8,6 @@ class TokenService {
     return token;
   }
   async removeToken(refreshToken,tokenModel){
-    console.log(tokenModel)
     const tokenData = await tokenModel.deleteOne({refreshToken})
     return tokenData
   }

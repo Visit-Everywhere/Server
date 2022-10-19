@@ -52,7 +52,7 @@ class UserContoller {
     try {
       const { readData } = req
       const { email, code } = req.body
-      await UserService.restoreCode(email, code);
+      await UserService.restoreCode(email, code, readData);
       res.status(200).json({status: 200, message: 'Code is valid'});
     } catch (err) {
       next(err)
