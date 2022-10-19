@@ -16,7 +16,7 @@ app.use((req, res, next) => {
   req.models = models;
   next();
 });
-
+ 
 // app.use(express.static('public')) // if project is 1 tier
 app.use(cookieParser())
 app.use(express.json());
