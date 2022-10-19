@@ -28,7 +28,7 @@ export default (req, res, next) => {
       const { error } = userValidationRestoreCode.validate({ body: req.body });
       if (error) throw error;
     }
-    if (req.method === "POST" && req.url == "/restorePassword") {
+    if (req.method === "PUT" && req.url == "/restorePassword") {
       const { error } = userValidationRestorePassword.validate({ body: req.body });
       if (error) throw error;
     }

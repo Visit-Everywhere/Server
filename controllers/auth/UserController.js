@@ -50,10 +50,10 @@ class UserContoller {
   }
   async restoreCode(req, res, next) {
     try {
-      const { readData } = req
+      const { readData, writeData } = req
       const { email, code } = req.body
-      await UserService.restoreCode(email, code, readData);
-      res.status(200).json({status: 200, message: 'Code is valid'});
+      await UserService.restoreCode(email, code, readData, writeData);
+      res.status(200).json({status: 200, message: 'Code accespted'});
     } catch (err) {
       next(err)
     }
