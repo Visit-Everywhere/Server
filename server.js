@@ -16,10 +16,11 @@ app.use((req, res, next) => {
   req.models = models;
   next();
 });
-app.use(redis())
+
 // app.use(express.static('public')) // if project is 1 tier
-app.use(express.json());
 app.use(cookieParser())
+app.use(express.json());
+app.use(redis())
 app.use(authRouter);
 app.use((error, req, res, next) => {
   // its our error handler middleware

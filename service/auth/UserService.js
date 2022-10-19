@@ -76,6 +76,10 @@ class UserService {
       throw error;
     }
   }
+  async logout(refreshToken, tokenModel){
+    const token = await tokenService.removeToken(refreshToken, tokenModel)
+    return token 
+  }
   // restore password
 
   // restoreEmail

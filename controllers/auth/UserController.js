@@ -64,7 +64,7 @@ class UserContoller {
       const { email, password } = req.body
       const { readData, deleteData } = req
       let userInfo = await UserService.restorePassword(email, password, UserModel, TokenModel, readData, deleteData);
-      res.cookie('refreshToken', userInfo.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+      res.cookie("refreshToken", userInfo.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
       res.status(200).json(userInfo);
     } catch (err) {
       next(err)
@@ -75,6 +75,11 @@ class UserContoller {
   // logout
   async logout(req, res, next) {
     try {
+      const { refreshToken } = req.cookies
+      const { TokenModel } = req.models
+      const token = UserService.logout(refreshToken, TokenModel)
+      res.clearCookie("refreshToken")
+      res.status(200).json(token)
     } catch (err) {
       console.log(`This is error:${err}`);
     }
