@@ -84,8 +84,64 @@ class UserService {
   // restore password
 
   // restoreEmail
+  async restoreEmail(email, userModel, writeData) {
+    try {
+      const person = await userModel.findOne({ email });
+      if (!person) {
+        throw new NotFoundError(400, "The user is not found");
+      }
+      let code = codeGenerator();
+
+      writeData(email, { code: code, accepted: false  });
+
+      mailer({
+        from: "xayrullohabduvohidov713@gmail.com",
+        to: email, // to user
+        subject: "Visit Everywhere",
+        text: `This is your verification code ${code}`,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
   // restoreCode
+  async restoreCode(email, code, readData, writeData) {
+    try {
+      let currentUser = await readData(email);
+
+      if (!currentUser) {
+        throw new NotFoundError(400, "The user is not found");
+      }
+      if (!(currentUser.code == code)) {
+        throw new ValidationError(400, "Code does not match");
+      }
+
+      writeData(email, { code: code, accepted: true  });
+    } catch (error) {
+      throw error;
+    }
+  }
   // restorePassword
+  async restorePassword(email, password, userModel, tokenModel, readData, deleteData) {
+    try {
+      let currentUser = await readData(email);
+
+      if (!currentUser || !currentUser.accepted) {
+        throw new NotFoundError(400, "The user is not found");
+      }
+      deleteData(email)
+
+      let user = await userModel.findOneAndUpdate({email}, {password})
+      const userDto = new UserDto(user);
+      const tokens = { accesToken: JWT.sign({ ...userDto }), refreshToken: JWT.refresh({ ...userDto }) };
+
+      await tokenService.saveToken(userDto.id, tokens.refreshToken, tokenModel);
+      return { ...tokens, userDto };
+      
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default new UserService();

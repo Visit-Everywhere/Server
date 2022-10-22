@@ -16,7 +16,7 @@ authRouter.post("/login", validations, UserController.login);
 
 authRouter.post("/restoreEmail", validations, UserController.restoreEmail);
 authRouter.post("/restoreCode", validations, UserController.restoreCode);
-authRouter.post("/restorePassword", validations, UserController.restorePassword);
+authRouter.put("/restorePassword", validations, UserController.restorePassword);
 
 
 // ...
