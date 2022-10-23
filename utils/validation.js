@@ -1,7 +1,41 @@
 import Joi from "joi";
 
+export default function (method, url, body) {
+  if (method === "POST") {
+    // register validation errors
+    if (url == "/register") {
+      const { error } = userValidationRegister.validate({ body });
+      if (error) throw error;
+    } else if (url == "checkCode") {
+      const { error } = userValidationCode.validate({ body });
+      if (error) throw error;
+    }
+    // login validation errors
+    else if (url == "/login") {
+      const { error } = userValidationLogin.validate({ body });
+      if (error) throw error;
+    }
+    // restore password errors
+    else if (url == "/restoreEmail") {
+      const { error } = userValidationRestoreEmail.validate({ body });
+      if (error) throw error;
+    } else if (url == "/restoreCode") {
+      const { error } = userValidationRestoreCode.validate({ body });
+      if (error) throw error;
+    }
+  } else if (method === "PUT") {
+    // restore password errors
+    if (url == "/restorePassword") {
+      const { error } = userValidationRestorePassword.validate({ body });
+      if (error) throw error;
+    }
+  } else if (method === "DELETE") {
+    // the route does not exist now
+  }
+}
+
 // register validation
-export const userValidationRegister = Joi.object({
+const userValidationRegister = Joi.object({
   body: Joi.object({
     username: Joi.string().required().max(15).alphanum(),
     password: Joi.string().required().min(4),
@@ -11,7 +45,7 @@ export const userValidationRegister = Joi.object({
     gender: Joi.string().valid("male", "female").required(),
   }),
 });
-export const userValidationCode = Joi.object({
+const userValidationCode = Joi.object({
   body: Joi.object({
     code: Joi.string().required().length(6),
     email: Joi.string()
@@ -21,7 +55,7 @@ export const userValidationCode = Joi.object({
 });
 
 // login validation
-export const userValidationLogin = Joi.object({
+const userValidationLogin = Joi.object({
   body: Joi.object({
     email: Joi.string()
       .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
@@ -31,28 +65,27 @@ export const userValidationLogin = Joi.object({
 });
 
 // restore password validation
-export const userValidationRestoreEmail = Joi.object({
+const userValidationRestoreEmail = Joi.object({
   body: Joi.object({
-    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }).required(),
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+      .required(),
   }),
 });
-export const userValidationRestoreCode = Joi.object({
+const userValidationRestoreCode = Joi.object({
   body: Joi.object({
-    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }).required(),
-    code: Joi.string().required().length(6)
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+      .required(),
+    code: Joi.string().required().length(6),
   }),
 });
-export const userValidationRestorePassword = Joi.object({
+const userValidationRestorePassword = Joi.object({
   body: Joi.object({
-    email: Joi.string().email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } }).required(),
+    email: Joi.string()
+      .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
+      .required(),
     password: Joi.string().required(),
-    confirm: Joi.string().valid(Joi.ref('password')).required()
-  }),
-});
-
-// token validation
-export const userValidationToken = Joi.object({
-  query: Joi.object({
-    token: Joi.string().required(),
+    confirm: Joi.string().valid(Joi.ref("password")).required(),
   }),
 });
