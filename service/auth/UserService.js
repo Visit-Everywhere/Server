@@ -19,12 +19,7 @@ class UserService {
 
       writeData(email, { email, password: hashedPassword, gender, username, code: code });
 
-      mailer({
-        from: "xayrullohabduvohidov713@gmail.com",
-        to: email, // to user
-        subject: "Visit Everywhere",
-        text: `This is your verification code ${code}`,
-      });
+      mailer(email, code)
     } catch (error) {
       throw error;
     }
@@ -76,12 +71,12 @@ class UserService {
       throw error;
     }
   }
+
   // logout
   async logout(refreshToken, tokenModel){
     const token = await tokenService.removeToken(refreshToken, tokenModel)
     return token 
   }
-  // restore password
 
   // restoreEmail
   async restoreEmail(email, userModel, writeData) {
@@ -94,12 +89,7 @@ class UserService {
 
       writeData(email, { code: code, accepted: false  });
 
-      mailer({
-        from: "xayrullohabduvohidov713@gmail.com",
-        to: email, // to user
-        subject: "Visit Everywhere",
-        text: `This is your verification code ${code}`,
-      });
+      mailer(email, code);
     } catch (error) {
       throw error;
     }

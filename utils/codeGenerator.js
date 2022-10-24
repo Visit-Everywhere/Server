@@ -1,5 +1,5 @@
 export default function () {
-  let chars = "acdefhiklmnoqrstuvwxyz0123456789".split("");
+  let chars = "abcdefhiklmnoqrstuvwxyz0123456789".split("");
   let result = "";
   for (let i = 0; i < 6; i++) {
     result += chars[Math.floor(Math.random() * chars.length)];
