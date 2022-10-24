@@ -21,7 +21,7 @@ app.use((req, res, next) => {
 app.use(cookieParser())
 app.use(express.json());
 app.use(redis())
-app.use(authRouter);
+app.use("/user", authRouter);
 app.use((error, req, res, next) => {
   // its our error handler middleware
   if (error.status !== 500) {

@@ -1,5 +1,6 @@
 import UserService from "#authService/UserService";
 
+
 class UserContoller {
   // register
   async register(req, res, next) {
@@ -84,14 +85,15 @@ class UserContoller {
       console.log(`This is error:${err}`);
     }
   }
-  async activate(req, res, next) {
-    try {
-    } catch (err) {
-      console.log(`This is error:${err}`);
-    }
-  }
+ 
+  // refresh
   async refresh(req, res, next) {
     try {
+      const { refreshToken } = req.cookies
+      const { TokenModel, UserModel } = req.models
+      userData = await UserService.refresh(refreshToken, TokenModel, UserModel)
+      res.cookie("refreshToken", userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
+      res.status(200).json(userData)
     } catch (err) {
       console.log(`This is error:${err}`);
     }

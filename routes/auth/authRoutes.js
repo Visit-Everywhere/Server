@@ -10,20 +10,20 @@ authRouter.post("/register", validations, UserController.register);
 authRouter.post("/checkCode", validations, UserController.checkCode);
 
 // login routes
+
 authRouter.post("/login", validations, UserController.login);
 
 // restore password routes
 
-authRouter.post("/restoreEmail", validations, UserController.restoreEmail);
-authRouter.post("/restoreCode", validations, UserController.restoreCode);
-authRouter.put("/restorePassword", validations, UserController.restorePassword);
+authRouter.post("/restore/email", validations, UserController.restoreEmail);
+authRouter.post("/restore/code", validations, UserController.restoreCode);
+authRouter.put("/restore/password", validations, UserController.restorePassword);
 
-
-// ...
+// logout routes
 
 authRouter.post("/logout", UserController.logout);
 
-authRouter.get("/activate:link", UserController.activate);
+// refresh token routes
 
 authRouter.get("/refresh", UserController.refresh);
 

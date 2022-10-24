@@ -132,6 +132,21 @@ class UserService {
       throw error;
     }
   }
+  async refresh(refreshToken, tokenModel, userModel){
+    if(!refreshToken){
+      throw new NotFoundError(400, "The user is not found")
+    }
+    const validToken = tokenService.validateRefreshToken(refreshToken)
+    const findTokenInDb = await tokenService.findToken(refreshToken, tokenModel)
+    if(!validToken || !findTokenInDb){
+      throw new NotFoundError(400, "The user is not found")
+    }
+    const user = await userModel.findById(validToken.id)
+    const userDto = new UserDto(user);
+    const tokens = { accesToken: JWT.sign({ ...userDto }), refreshToken: JWT.refresh({ ...userDto }) };
+    await tokenService.saveToken(userDto.id, tokens.refreshToken, tokenModel);
+    return { ...tokens, userDto };
+  }
 }
 
 export default new UserService();
