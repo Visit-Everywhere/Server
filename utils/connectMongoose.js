@@ -1,12 +1,9 @@
 import mongoose from "mongoose";
-import dotenv from "dotenv"; // connecting dotenv
-dotenv.config();
 
-connect();
 
 import models from "../models/index.js";
 
-async function connect() {
+export async function connect() {
   try {
     await mongoose.connect(process.env.DB_CONNECT, {
       useNewUrlParser: true,
@@ -19,6 +16,6 @@ async function connect() {
     return false;
   }
 }
-export default {
-  models,
+export const DB = {
+  models
 };

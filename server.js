@@ -1,11 +1,14 @@
 import express from "express";
-import DB from "#utils/connectMongoose"; // DB connecting
+import {DB, connect} from "#utils/connectMongoose"; // DB connecting
 import fs from "fs";
 import path from "path";
 import authRouter from "#authRoute/authRoutes";
 import redis from '#middlewares/redis'
 import cookieParser from "cookie-parser";
+import dotenv from "dotenv"; // connecting dotenv
 
+
+dotenv.config();
 const app = express();
 const { models } = DB; // extracting al models
 const PORT = process.env.PORT || 3000;
@@ -16,7 +19,7 @@ app.use((req, res, next) => {
   req.models = models;
   next();
 });
- 
+connect()
 // app.use(express.static('public')) // if project is 1 tier
 app.use(cookieParser())
 app.use(express.json());
