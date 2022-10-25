@@ -3,7 +3,7 @@ import {DB, connect} from "#utils/connectMongoose"; // DB connecting
 import fs from "fs";
 import path from "path";
 import authRouter from "#authRoute/authRoutes";
-import redis from '#middlewares/redis'
+import redis from '#middlewares/redisMiddleware'
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv"; // connecting dotenv
 

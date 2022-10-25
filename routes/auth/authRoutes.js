@@ -1,6 +1,7 @@
 import { Router } from "express";
-import validations from "#middlewares/validation";
+import validations from "#middlewares/validationMiddleware";
 import UserController from "#authController/UserController";
+import authMiddleware from "#middlewares/authMiddleware";
 
 const authRouter = Router();
 
@@ -21,7 +22,7 @@ authRouter.put("/restore/password", validations, UserController.restorePassword)
 
 // logout routes
 
-authRouter.post("/logout", UserController.logout);
+authRouter.post("/logout", authMiddleware, UserController.logout);
 
 // refresh token routes
 
