@@ -25,7 +25,7 @@ let mailer = async (to, code) => {
             `,
     },
     (err, info) => {
-      if (err) return console.log(err.message);
+      if (err) return console.log(err.messagez);
       console.log("ok", info);
     }
   );

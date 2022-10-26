@@ -5,10 +5,8 @@ import path from "path";
 import authRouter from "#authRoute/authRoutes";
 import redis from '#middlewares/redisMiddleware'
 import cookieParser from "cookie-parser";
-import dotenv from "dotenv"; // connecting dotenv
 
 
-dotenv.config();
 const app = express();
 const { models } = DB; // extracting al models
 const PORT = process.env.PORT || 3000;
