@@ -16,16 +16,16 @@ export default function (method, url, body) {
       if (error) throw error;
     }
     // restore password errors
-    else if (url == "/restoreEmail") {
+    else if (url == "/restore/email") {
       const { error } = userValidationRestoreEmail.validate({ body });
       if (error) throw error;
-    } else if (url == "/restoreCode") {
+    } else if (url == "/restore/code") {
       const { error } = userValidationRestoreCode.validate({ body });
       if (error) throw error;
     }
   } else if (method === "PUT") {
     // restore password errors
-    if (url == "/restorePassword") {
+    if (url == "/restore/password") {
       const { error } = userValidationRestorePassword.validate({ body });
       if (error) throw error;
     }

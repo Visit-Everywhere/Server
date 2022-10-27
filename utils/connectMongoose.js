@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-
+import dotenv from "dotenv"; // connecting dotenv
+dotenv.config();
 
 import models from "../models/index.js";
 
