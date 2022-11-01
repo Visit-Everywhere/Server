@@ -1,5 +1,5 @@
-import { Model, Schema } from "mongoose";
+// import { Model, Schema } from "mongoose";
 
-const RestarauntSchema = new Schema({
-    places: [{ref: 'Restaraunt'}]
-})
+// const RestarauntSchema = new Schema({
+//     places: [{ref: 'Restaraunt'}]
+// })

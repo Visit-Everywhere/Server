@@ -1,4 +1,4 @@
-import tokenService from "./TokenService.js";
+import tokenService from "#authService/TokenService";
 
 import { ForbiddenError } from "#utils/errors";
 
