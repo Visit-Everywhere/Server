@@ -14,7 +14,7 @@
 
 // //     rating:{ref:'RestarauntRating'},
 
-// //     menu:[{ref: 'RestarauntMenu'}],
+// //     menu:[{ref: 'RestarauntDish'}],
 
 // //     comments:[{ref:'RestarauntComment'}],
 
