@@ -1,6 +1,5 @@
 import UserService from "#authService/UserService";
 
-
 class UserContoller {
   // register
   async register(req, res, next) {
