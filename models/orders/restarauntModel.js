@@ -1,29 +1,31 @@
-// import { Model, Schema } from "mongoose";
+// // import { Model, Schema } from "mongoose";
 
-// const RestarauntSchema = new Schema({
+// // const PlaceSchema = new Schema({
 
-//     name:{type: String, required: true},
+// //     name:{type: String, required: true},
 
-//     photo: [{ref: 'RestarauntPhoto'}],
+// //     photo: [{link: String}],
 
-//     schedule:{type: Object, ref: 'RestarauntSchedule'},
+// //     schedule:[{ref: 'RestarauntSchedule'}],
 
-//     phoneNumber: Number,
+// //     phoneNumber: Number,
 
-//     discription: String,
+// //     discription: String,
 
-//     rating:{type: Object, ref:'RestarauntRating'},
+// //     rating:{ref:'RestarauntRating'},
 
-//     menu:[{ref: 'RestarauntMenu'}],
+// //     menu:[{ref: 'RestarauntMenu'}],
 
-//     comments:[{ref:'RestarauntComment'}],
+// //     comments:[{ref:'RestarauntComment'}],
 
-//     location:{address: String, coordinates: Number},
+// //     location:{address: String, coordinates: Number},
 
-//     customize:{ref:'RestarauntCustomize'},
+// //     customize:{ref:'RestarauntCustomize'},
 
-//     socials:{ref:'RestarauntSocials'},
+// //     socials:{ref:'RestarauntSocials'},
 
-//     subscribe:{type: String},
+// //     subscribe:{type: String},
     
-// })
+// // })
+
+// export default model('Place', PlaceSchema)
