@@ -1,7 +1,7 @@
-// // import { Model, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
-// // const RestarauntSchema = new Schema({
-// //     places: [{ref: 'Restaraunt'}]
-// // })
+const RestarauntSchema = new Schema({
+    places: [{ref: 'Restaraunt'}]
+})
 
-// export default model('Restaraunt', RestarauntSchema)
+export default model('Restaraunt', RestarauntSchema)

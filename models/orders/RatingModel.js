@@ -1,12 +1,12 @@
-// // import { Model, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
-// // const RatingSchema = new Schema({
-// //     AVG: {Number},
-// //     food: {Number},
-// //     service: {Number},
-// //     ambience: {Number},
-// //     reviews: {Number},
-// //     marks: {Number},
-// // })
+const RatingSchema = new Schema({
+    AVG: {Number},
+    food: {Number},
+    service: {Number},
+    ambience: {Number},
+    reviews: {Number},
+    marks: {Number},
+})
 
-// export default model('Restaraunt', RestarauntSchema)
+export default model('RestarauntRating', RatingSchema)

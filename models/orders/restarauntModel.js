@@ -1,31 +1,27 @@
-// // import { Model, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
-// // const PlaceSchema = new Schema({
+const PlaceSchema = new Schema({
 
-// //     name:{type: String, required: true},
+    name:{type: String, required: true},
 
-// //     photo: [{link: String}],
+    photo: [{link: String}],
 
-// //     schedule:[{ref: 'RestarauntSchedule'}],
+    schedule:[{ref: 'RestarauntSchedule'}],
 
-// //     phoneNumber: Number,
+    phoneNumber: Number,
 
-// //     discription: String,
+    discription: String,
 
-// //     rating:{ref:'RestarauntRating'},
+    rating:{ref:'RestarauntRating'},
 
-// //     menu:[{ref: 'RestarauntDish'}],
+    menu:[{ref: 'RestarauntDish', section: 'String'}],
 
-// //     comments:[{ref:'RestarauntComment'}],
+    comments:[{ref:'RestarauntComment'}],
 
-// //     location:{address: String, coordinates: Number},
+    location:{address: String, coordinates: Number},
 
-// //     customize:{ref:'RestarauntCustomize'},
-
-// //     socials:{ref:'RestarauntSocials'},
-
-// //     subscribe:{type: String},
+    subscribe:{type: String},
     
-// // })
+})
 
-// export default model('Place', PlaceSchema)
+export default model('Place', PlaceSchema)

@@ -1,9 +1,9 @@
-// import { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 
-// const ScheduleSchema = new Schema({
-//   day: String,
+const ScheduleSchema = new Schema({
+  day: String,
 
-//   time: Number,
-// });
+  time: Number,
+});
 
-// export default model('RestarauntSchedule', ScheduleSchema)
+export default model('RestarauntSchedule', ScheduleSchema)
