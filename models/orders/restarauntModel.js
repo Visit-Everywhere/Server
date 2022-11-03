@@ -4,7 +4,7 @@ const PlaceSchema = new Schema({
 
     name:{type: String, required: true},
 
-    photo: [{link: String}],
+    photo: [{ref: 'Image'}],
 
     schedule:[{ref: 'RestarauntSchedule'}],
 
