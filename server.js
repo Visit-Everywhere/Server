@@ -6,10 +6,9 @@ import authRouter from "#authRoute/authRoutes";
 import redis from '#middlewares/redisMiddleware'
 import cookieParser from "cookie-parser";
 
-
 const app = express();
 const { models } = DB; // extracting al models
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // middlewares
 app.use((req, res, next) => {
