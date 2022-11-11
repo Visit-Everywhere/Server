@@ -5,7 +5,7 @@ import path from "path";
 import authRouter from "#authRoute/authRoutes";
 import redis from '#middlewares/redisMiddleware'
 import cookieParser from "cookie-parser";
-import imageRouter from "./routes/imageRoutes";
+import imageRouter from "./routes/imageRoutes.js";
 
 const app = express();
 const { models } = DB; // extracting al models
