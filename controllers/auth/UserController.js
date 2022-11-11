@@ -4,10 +4,10 @@ class UserContoller {
   // register
   async register(req, res, next) {
     try {
-      const { email, password, gender, username } = req.body;
+      const { email, password, username } = req.body;
       const { UserModel } = req.models;
       const { writeData } = req
-      await UserService.register(email, password, gender, username, UserModel, writeData);
+      await UserService.register(email, password, username, UserModel, writeData);
       res.status(200).json({status: 200, message: 'Code sended to user email'});
     } catch (err) {
       next(err)

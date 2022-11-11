@@ -8,7 +8,7 @@ import { ValidationError, NotFoundError } from "#utils/errors";
 
 class UserService {
   // register
-  async register(email, password, gender, username, userModel, writeData) {
+  async register(email, password, username, userModel, writeData) {
     try {
       const person = await userModel.findOne({ email });
       if (person) {
@@ -17,7 +17,7 @@ class UserService {
       const hashedPassword = await bcrypt.hash(password, 3);
       let code = codeGenerator();
 
-      writeData(email, { email, password: hashedPassword, gender, username, code: code });
+      writeData(email, { email, password: hashedPassword, username, code: code });
 
       mailer(email, code)
     } catch (error) {
@@ -34,7 +34,6 @@ class UserService {
         const user = await userModel.create({
           email: currentUser.email,
           password: currentUser.password,
-          gender: currentUser.gender,
           username: currentUser.username,
         });
         const userDto = new UserDto(user);

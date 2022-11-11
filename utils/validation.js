@@ -42,7 +42,6 @@ const userValidationRegister = Joi.object({
     email: Joi.string()
       .email({ minDomainSegments: 2, tlds: { allow: ["com", "net"] } })
       .required(),
-    gender: Joi.string().valid("male", "female").required(),
   }),
 });
 const userValidationCode = Joi.object({
