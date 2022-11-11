@@ -5,6 +5,7 @@ import path from "path";
 import authRouter from "#authRoute/authRoutes";
 import redis from '#middlewares/redisMiddleware'
 import cookieParser from "cookie-parser";
+import imageRouter from "./routes/imageRoutes";
 
 const app = express();
 const { models } = DB; // extracting al models
@@ -21,6 +22,7 @@ connect()
 app.use(cookieParser())
 app.use(express.json());
 app.use(redis())
+app.use("/image", imageRouter)
 app.use("/user", authRouter);
 app.use((error, req, res, next) => {
   // its our error handler middleware

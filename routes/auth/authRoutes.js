@@ -24,18 +24,5 @@ authRouter.post("/logout", authMiddleware, UserController.logout);
 // refresh token routes
 authRouter.get("/refresh", UserController.refresh);
 
-// images multers3
-import upload from "#utils/aws";
-
-authRouter.post("/images", upload.single("image"), async (req, res) => {
-  await req.models.ImageModel.create({
-    link: req.file.location,
-    key: req.file.key,
-  });
-  res.send({
-    message: "Uploaded!",
-    link: req.file.location
-  });
-});
 
 export default authRouter;
