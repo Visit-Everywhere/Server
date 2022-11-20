@@ -23,7 +23,7 @@ app.use(cookieParser())
 app.use(express.json());
 app.use(redis())
 // activate all routes
-app.use("/api", allRouter)
+app.use("/", allRouter)
 
 app.use((error, req, res, next) => {
   // its our error handler middleware
