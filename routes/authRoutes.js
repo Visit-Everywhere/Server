@@ -8,7 +8,7 @@ const authRouter = Router();
 // register routes
 authRouter.post("/register", validations, UserController.register);
 
-authRouter.post("/checkCode", validations, UserController.checkCode);
+authRouter.post("/code", validations, UserController.checkCode);
 
 // login routes
 authRouter.post("/login", validations, UserController.login);

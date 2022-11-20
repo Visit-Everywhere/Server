@@ -1,6 +1,7 @@
 class ImageController {
   async uploadImage(req, res, next) {
     try {
+      console.log(req.file)
       await req.models.ImageModel.create({
         link: req.file.location,
         key: req.file.key,

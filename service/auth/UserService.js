@@ -35,6 +35,8 @@ class UserService {
           email: currentUser.email,
           password: currentUser.password,
           username: currentUser.username,
+          isActivated: true,
+          roles: ["USER"]
         });
         const userDto = new UserDto(user);
         const tokens = {

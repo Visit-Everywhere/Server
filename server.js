@@ -2,14 +2,14 @@ import express from "express";
 import {DB, connect} from "#utils/connectMongoose"; // DB connecting
 import fs from "fs";
 import path from "path";
-import authRouter from "#authRoute/authRoutes";
 import redis from '#middlewares/redisMiddleware'
 import cookieParser from "cookie-parser";
-import imageRouter from "./routes/imageRoutes.js";
+import allRouter from "./routes/index.js"
 
 const app = express();
 const { models } = DB; // extracting al models
 const PORT = process.env.PORT;
+
 
 // middlewares
 app.use((req, res, next) => {
@@ -22,8 +22,9 @@ connect()
 app.use(cookieParser())
 app.use(express.json());
 app.use(redis())
-app.use("/image", imageRouter)
-app.use("/user", authRouter);
+// activate all routes
+app.use("/api", allRouter)
+
 app.use((error, req, res, next) => {
   // its our error handler middleware
   if (error.status !== 500) {

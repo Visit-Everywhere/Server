@@ -19,10 +19,28 @@ const UserSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    role: [
+    phone: {
+      type: String,
+    },
+    photo: {
+      type: Schema.Types.ObjectId,
+      ref: "image",
+    },
+    purchaseHistory: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Dish",
+      },
+    ],
+    savedPlaces: {
+      type: Schema.Types.ObjectId,
+      ref: "Place",
+    },
+    roles: [
       {
         type: String,
-        ref: "Role",
+        unique: true,
+        default: "USER",
       },
     ],
   },
