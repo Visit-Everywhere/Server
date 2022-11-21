@@ -5,6 +5,7 @@ import path from "path";
 import redis from '#middlewares/redisMiddleware'
 import cookieParser from "cookie-parser";
 import allRouter from "./routes/index.js"
+import cors from 'cors'
 
 const app = express();
 const { models } = DB; // extracting al models
@@ -22,6 +23,7 @@ connect()
 app.use(cookieParser())
 app.use(express.json());
 app.use(redis())
+app.use(cors())
 // activate all routes
 app.use("/", allRouter)
 
