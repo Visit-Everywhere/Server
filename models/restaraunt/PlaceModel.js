@@ -21,12 +21,6 @@ const PlaceSchema = new Schema({
 
   AVGPrice: Number,
 
-  placeType: [{ type: String }],
-
-  icon: {
-    name: String,
-    img: { ref: "image", type: Schema.Types.ObjectId },
-  },
 });
 
 export default model("Place", PlaceSchema);

@@ -4,13 +4,14 @@ class UserContoller {
   // register
   async register(req, res, next) {
     try {
-      const { email, password, username } = req.body;
+      const { email, password, username, phone} = req.body;
       const { UserModel } = req.models;
       const { writeData } = req;
       await UserService.register(
         email,
         password,
         username,
+        phone,
         UserModel,
         writeData
       );

@@ -8,7 +8,7 @@ import { ValidationError, NotFoundError } from "#utils/errors";
 
 class UserService {
   // register
-  async register(email, password, username, userModel, writeData) {
+  async register(email, password, username, phone, userModel, writeData) {
     try {
       const person = await userModel.findOne({ email });
       if (person) {
