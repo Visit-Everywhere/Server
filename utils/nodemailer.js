@@ -1,4 +1,5 @@
 import nodemailer from "nodemailer";
+import {InternalServerError} from "#utils/errors"
 
 let transporter = nodemailer.createTransport({
   service: "gmail",
@@ -25,7 +26,7 @@ let mailer = async (to, code) => {
             `,
     },
     (err, info) => {
-      if (err) return console.log(err.messagez);
+      if (err) throw new InternalServerError(500, err);
       console.log("ok", info);
     }
   );
