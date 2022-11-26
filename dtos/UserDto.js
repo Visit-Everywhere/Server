@@ -7,5 +7,6 @@ export default class UserDto {
     this.id = model._id;
     this.isActivated = true;
     this.username = model.username
+    this.userRoles = model.roles
   }
 }
