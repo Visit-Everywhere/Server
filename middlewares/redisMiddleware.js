@@ -1,9 +1,9 @@
 import Redis from 'redis'
 import { InternalServerError } from '#utils/errors'
 
-// let redisClient = Redis.createClient()
+let redisClient = Redis.createClient()
 // if in docker
-let redisClient = Redis.createClient({url: 'redis://redis:6379'}); 
+// let redisClient = Redis.createClient({url: 'redis://redis:6379'}); 
 
 
 await redisClient.connect()
